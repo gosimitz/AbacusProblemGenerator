@@ -11,9 +11,9 @@ public class ProblemGenerator  {
     /**
      * Generates random math problems. 25% from each difficulty
      * @param totalProblems - Total number of problems to generate
-     * @return - an ArrayList of all the MathProblems generated
+     * @return - an Array of all the MathProblems generated
      */
-    public static ArrayList<MathProblem> generateProblems(int totalProblems){
+    public static MathProblem[] generateProblems(int totalProblems){
         int count = totalProblems/4;
         return generateProblems(count, count, count, count);
     }
@@ -24,21 +24,26 @@ public class ProblemGenerator  {
      * @param levelTwo - Number of level two problems
      * @param levelThree - Number of level three problems
      * @param levelFour - Number of level four problems
-     * @return an ArrayList containing the MathProblems in order of difficulty. 
+     * @return an Array containing the MathProblems in order of difficulty.
      */
-    public static ArrayList<MathProblem> generateProblems(int levelOne, int levelTwo, int levelThree, int levelFour){
-        ArrayList<MathProblem> problems = new ArrayList<>();
+    public static MathProblem[] generateProblems(int levelOne, int levelTwo, int levelThree, int levelFour){
+        MathProblem[] problems = new MathProblem[levelOne+levelTwo+levelThree+levelFour];
+        int currSpot = 0;
         for(int i = 0; i < levelOne; i++) {
-            problems.add(getLevelOneAddition());
+            problems[currSpot] = getLevelOneAddition();
+            currSpot++;
         }
         for(int i = 0; i < levelTwo; i++) {
-            problems.add(getLevelTwoAddition());
+            problems[currSpot] = getLevelTwoAddition();
+            currSpot++;
         }
         for(int i = 0; i < levelThree; i++) {
-            problems.add(getLevelThreeAddition());
+            problems[currSpot] = getLevelThreeAddition();
+            currSpot++;
         }
         for(int i = 0; i < levelFour; i++) {
-            problems.add(getLevelFourAddition());
+            problems[currSpot] = getLevelFourAddition();
+            currSpot++;
         }
         return problems;
     }
@@ -52,7 +57,7 @@ public class ProblemGenerator  {
      * @param levelFour - % of level four problems
      * @return an ArrayList containing the MathProblems in order of difficulty. 
      */
-    public static ArrayList<MathProblem> generateProblems(int totalCount, double levelOne, double levelTwo, double levelThree, double levelFour){
+    public static MathProblem[] generateProblems(int totalCount, double levelOne, double levelTwo, double levelThree, double levelFour){
         return generateProblems((int)levelOne*totalCount, (int)levelTwo*totalCount, (int)levelThree*totalCount, (int)levelFour*totalCount);
     }
 
